@@ -1,4 +1,5 @@
 ﻿using PraticaProgramacao.src.dtos;
+using PraticaProgramacao.src.modelos;
 
 namespace PraticaProgramacao.src.repositorios
 {
@@ -9,5 +10,11 @@ namespace PraticaProgramacao.src.repositorios
     {
         void NovoFamilia(NovoFamiliaDTO Familia);
         void AtualizarFamilia(AtualizarFamiliaDTO Familia);
+        void Deletar(int id);
+        FamiliaModelo PegarPeloId(int id);
+        FamiliaModelo PegarPeloNome(string nome);
+        FamiliaModelo PegarPeloApto(string apto);
+
+
     }
 }

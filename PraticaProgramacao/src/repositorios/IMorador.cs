@@ -8,6 +8,7 @@ namespace PraticaProgramacao.src.repositorios
         void NovoMorador(NovoMoradorDTO Morador);
         void AtualizarMorador(AtualizarMoradorDTO Morador);
         void DeletarMorador(int id);
-        MoradorModelo PegarMoradorPeloId(int id);
+        MoradorModelo PegarPeloId(int id);
+        MoradorModelo PegarPeloNome(string nome);
     }
 }

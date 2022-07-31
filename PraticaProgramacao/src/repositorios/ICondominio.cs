@@ -1,4 +1,5 @@
 ﻿using PraticaProgramacao.src.dtos;
+using PraticaProgramacao.src.modelos;
 
 namespace PraticaProgramacao.src.repositorios
 {
@@ -8,5 +9,8 @@ namespace PraticaProgramacao.src.repositorios
     public interface ICondominio
     {
         void NovoCondominio(NovoCondominioDTO Condominio);
+        CondominioModelo PegarPeloId(int id);
+        CondominioModelo PegarPeloNome(string Nome);
+        CondominioModelo PegarPeloBairro(string bairro);
     }
 }
