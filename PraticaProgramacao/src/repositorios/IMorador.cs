@@ -1,5 +1,6 @@
 ﻿using PraticaProgramacao.src.dtos;
 using PraticaProgramacao.src.modelos;
+using System.Collections.Generic;
 
 namespace PraticaProgramacao.src.repositorios
 {
@@ -9,6 +10,6 @@ namespace PraticaProgramacao.src.repositorios
         void AtualizarMorador(AtualizarMoradorDTO Morador);
         void DeletarMorador(int id);
         MoradorModelo PegarPeloId(int id);
-        MoradorModelo PegarPeloNome(string nome);
+       List<MoradorModelo> PegarPeloNome(string nome);
     }
 }

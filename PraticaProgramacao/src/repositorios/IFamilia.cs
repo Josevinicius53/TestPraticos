@@ -14,7 +14,5 @@ namespace PraticaProgramacao.src.repositorios
         FamiliaModelo PegarPeloId(int id);
         FamiliaModelo PegarPeloNome(string nome);
         FamiliaModelo PegarPeloApto(string apto);
-
-
     }
 }
