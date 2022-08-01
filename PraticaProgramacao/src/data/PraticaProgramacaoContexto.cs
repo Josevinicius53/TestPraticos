@@ -16,5 +16,6 @@ namespace PraticaProgramacao.src.data
         public DbSet<MoradorModelo> Morador { get; set; }
 
         public DbSet<FamiliaModelo> Familia { get; set; }
+        public PraticaProgramacaoContexto(DbContextOptions<PraticaProgramacaoContexto> opt) : base(opt) { }
     }
 }

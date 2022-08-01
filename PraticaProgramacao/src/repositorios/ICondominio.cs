@@ -1,5 +1,7 @@
 ﻿using PraticaProgramacao.src.dtos;
 using PraticaProgramacao.src.modelos;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PraticaProgramacao.src.repositorios
 {
@@ -8,9 +10,11 @@ namespace PraticaProgramacao.src.repositorios
     /// </summary>
     public interface ICondominio
     {
-        void NovoCondominio(NovoCondominioDTO Condominio);
-        CondominioModelo PegarPeloId(int id);
-        CondominioModelo PegarPeloNome(string Nome);
-        CondominioModelo PegarPeloBairro(string bairro);
+       Task NovoCondominioAsync(NovoCondominioDTO Condominio);
+       Task AtualizarAsync(AtualizarCondominioDTO Condominio);
+       Task DeletarCondominioAsync(int id);
+       Task<List<CondominioModelo>> PegarPeloIdAsync(int id);
+       Task<List<CondominioModelo>> PegarPeloNomeAsync(string Nome);
+       Task<List<CondominioModelo>> PegarPeloBairroAsync(string bairro);
     }
 }

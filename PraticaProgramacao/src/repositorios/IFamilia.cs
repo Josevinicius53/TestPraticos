@@ -1,5 +1,7 @@
 ﻿using PraticaProgramacao.src.dtos;
 using PraticaProgramacao.src.modelos;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PraticaProgramacao.src.repositorios
 {
@@ -8,11 +10,11 @@ namespace PraticaProgramacao.src.repositorios
     /// </summary>
     public interface IFamilia
     {
-        void NovoFamilia(NovoFamiliaDTO Familia);
-        void AtualizarFamilia(AtualizarFamiliaDTO Familia);
-        void Deletar(int id);
-        FamiliaModelo PegarPeloId(int id);
-        FamiliaModelo PegarPeloNome(string nome);
-        FamiliaModelo PegarPeloApto(string apto);
+        Task NovoFamiliaAsync(NovoFamiliaDTO Familia);
+        Task AtualizarFamiliaAsync(AtualizarFamiliaDTO Familia);
+        Task DeletarFamiliaAsync(int id);
+        Task<FamiliaModelo> PegarPeloId(int id);
+        Task<List<FamiliaModelo>> PegarPeloNome(string nome);
+        Task<FamiliaModelo> PegarPeloApto(string apto);
     }
 }

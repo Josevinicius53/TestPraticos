@@ -16,4 +16,22 @@ namespace PraticaProgramacao.src.dtos
             Bairro = bairro;
         }
     }
+    public class AtualizarCondominioDTO
+    {
+        [Required]
+        public int Id { get; set; }
+
+        [Required, StringLength(30)]
+        public string Nome { get; set; }
+
+        [Required, StringLength(30)]
+        public string Bairro { get; set; }
+
+        public AtualizarCondominioDTO(int id, string nome, string bairro)
+        {
+            Id = id;
+            Nome = nome;
+            Bairro = bairro;
+        }
+    }
 }
