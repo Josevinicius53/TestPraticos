@@ -11,7 +11,7 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
     /// <para>Resumo: Classe responsavel por implementar ICondominio</para>
     /// <para>Criado por: Jose vinicius </para>
     /// <para>Versão: 1.0</para>
-    /// <para>Data: 13/05/2022</para>
+    /// <para>Data: 31/08/2022</para>
     /// </summary>
     public class CondominioRepositorio : ICondominio
     {
@@ -28,8 +28,13 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
         {
             _contexto = contexto;
         }
-
         #endregion Construtores
+
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para Atualizar um Condominio pelo id</para>
+        /// </summary>
+        /// <param name="Condiminio"> Condominio</param>
+        /// <return>CondominioModelo</return>
         public async Task AtualizarAsync(AtualizarCondominioDTO Condominio)
         {
             var CondominioExistente = await PegarCondominioPeloIdAsync(Condominio.Id);
@@ -38,7 +43,11 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
             _contexto.Condominio.Update(CondominioExistente);
             await _contexto.SaveChangesAsync();
         }
-
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para Deletar um Condominio pelo id</para>
+        /// </summary>
+        /// <param name="bairro"> Condominio</param>
+        /// <return>CondominioModelo</return>
         public async Task DeletarCondominioAsync(int id)
         {
             _contexto.Condominio.Remove(await PegarCondominioPeloIdAsync(id));
@@ -64,7 +73,7 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
         /// <para>Resumo: Método assíncrono para pegar um Condominio pelo bairro</para>
         /// </summary>
         /// <param name="bairro"> Condominio</param>
-        /// <return>UsuarioModelo</return>
+        /// <return>CondominioModelo</return>
         public async Task<List<CondominioModelo>> PegarPeloBairroAsync(string bairro)
         {
             return await _contexto.Condominio.PegarPeloBairroAsync(u => u.Bairro == bairro);
@@ -74,7 +83,7 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
         /// <para>Resumo: Método assíncrono para pegar um Condominio pelo Id</para>
         /// </summary>
         /// <param name="id">Id do condominio</param>
-        /// <return>UsuarioModelo</return>
+        /// <return>CondominioModelo</return>
         public async Task<List<CondominioModelo>> PegarPeloIdAsync(int id)
         {
             return await _contexto.Condominio.FirstOrDefaultAsync(u => u.Id == id);

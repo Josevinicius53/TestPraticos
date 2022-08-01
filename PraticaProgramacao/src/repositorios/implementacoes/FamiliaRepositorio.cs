@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace PraticaProgramacao.src.repositorios.implementacoes
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por implementar IFamilia</para>
+    /// <para>Criado por: Jose vinicius </para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 31/08/2022</para>
+    /// </summary>
     public class FamiliaRepositorio : IFamilia
     {
         public Task AtualizarFamiliaAsync(AtualizarFamiliaDTO Familia)
