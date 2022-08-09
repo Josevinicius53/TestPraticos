@@ -18,14 +18,10 @@ namespace PraticaProgramacao.src.dtos
         [Required, StringLength(30)]
         public string Apto { get; set; }
 
-        [ForeignKey("fk_Condominio")]
-        public CondominioModelo Criador { get; set; }
-
-        public NovoFamiliaDTO(string nome, string apto, CondominioModelo criador)
+        public NovoFamiliaDTO(string nome, string apto)
         {
             Nome = nome;
             Apto = apto;
-            Criador = criador;
         }
     }
 
@@ -37,13 +33,17 @@ namespace PraticaProgramacao.src.dtos
     /// </summary>
     public class AtualizarFamiliaDTO
     {
+        public int Id { get; set; }
+
+        [Required, StringLength(30)]
         public string Nome { get; set; }
 
         [Required, StringLength(30)]
         public string Apto { get; set; }
 
-        public AtualizarFamiliaDTO(string nome, string apto)
+        public AtualizarFamiliaDTO(int id, string nome, string apto)
         {
+            Id = id;
             Nome = nome;
             Apto = apto;
         }

@@ -10,11 +10,11 @@ namespace PraticaProgramacao.src.repositorios
     /// </summary>
     public interface IFamilia
     {
-        Task NovoFamiliaAsync(NovoFamiliaDTO Familia);
-        Task AtualizarFamiliaAsync(AtualizarFamiliaDTO Familia);
+        Task NovoFamiliaAsync(NovoFamiliaDTO familia);
+        Task AtualizarFamiliaAsync(AtualizarFamiliaDTO familia);
         Task DeletarFamiliaAsync(int id);
-        Task<FamiliaModelo> PegarPeloId(int id);
-        Task<List<FamiliaModelo>> PegarPeloNome(string nome);
-        Task<FamiliaModelo> PegarPeloApto(string apto);
+        Task<FamiliaModelo> PegarFamiliaPeloId(int id);
+        Task<List<FamiliaModelo>> PegarFamiliaPeloNome(string nome);
+        Task<List<FamiliaModelo>> PegarFamiliaPeloApto(string apto);
     }
 }

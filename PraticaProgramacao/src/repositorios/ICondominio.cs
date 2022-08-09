@@ -10,11 +10,11 @@ namespace PraticaProgramacao.src.repositorios
     /// </summary>
     public interface ICondominio
     {
-       Task NovoCondominioAsync(NovoCondominioDTO Condominio);
-       Task AtualizarAsync(AtualizarCondominioDTO Condominio);
+       Task NovoCondominioAsync(NovoCondominioDTO condominio);
+       Task AtualizarCondominioAsync(AtualizarCondominioDTO condominio);
        Task DeletarCondominioAsync(int id);
-       Task<List<CondominioModelo>> PegarPeloIdAsync(int id);
-       Task<List<CondominioModelo>> PegarPeloNomeAsync(string Nome);
-       Task<List<CondominioModelo>> PegarPeloBairroAsync(string bairro);
+       Task<CondominioModelo> PegarCondominioPeloIdAsync(int id);
+       Task<List<CondominioModelo>> PegarCondominioPeloNomeAsync(string nome);
+       Task<CondominioModelo> PegarCondominioPeloBairroAsync(string bairro);
     }
 }

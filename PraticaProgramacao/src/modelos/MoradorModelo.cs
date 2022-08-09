@@ -23,6 +23,6 @@ namespace PraticaProgramacao.src.modelos
         public string Idade { get; set; }
 
         [ForeignKey("fk_familia")]
-        public FamiliaModelo Criador { get; set;}
+        public FamiliaModelo Familia { get; set;}
     }
 }

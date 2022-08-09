@@ -1,4 +1,5 @@
-﻿using PraticaProgramacao.src.data;
+﻿    using Microsoft.EntityFrameworkCore;
+using PraticaProgramacao.src.data;
 using PraticaProgramacao.src.dtos;
 using PraticaProgramacao.src.modelos;
 using System.Collections.Generic;
@@ -17,88 +18,66 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
     {
         #region Atributos
 
-        private readonly PraticaProgramacaoContexto _contexto;
+        private readonly PraticaProgramacaoContexto _context;
 
         #endregion Atributos
 
 
         #region Construtores
 
-        public CondominioRepositorio(PraticaProgramacaoContexto contexto)
+        public CondominioRepositorio(PraticaProgramacaoContexto context)
         {
-            _contexto = contexto;
+            _context = context;
         }
+
         #endregion Construtores
 
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para Atualizar um Condominio pelo id</para>
-        /// </summary>
-        /// <param name="Condiminio"> Condominio</param>
-        /// <return>CondominioModelo</return>
-        public async Task AtualizarAsync(AtualizarCondominioDTO Condominio)
+        #region Métodos
+        public async Task NovoCondominioAsync(NovoCondominioDTO condominio)
         {
-            var CondominioExistente = await PegarCondominioPeloIdAsync(Condominio.Id);
-            CondominioExistente.Nome = Condominio.Nome;
-            CondominioExistente.Bairo = Condominio.Bairro;
-            _contexto.Condominio.Update(CondominioExistente);
-            await _contexto.SaveChangesAsync();
+            await _context.Condominio.AddAsync(new CondominioModelo
+            {
+                Nome = condominio.Nome,
+                Bairro = condominio.Bairro,
+            });
+            await _context.SaveChangesAsync();
         }
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para Deletar um Condominio pelo id</para>
-        /// </summary>
-        /// <param name="bairro"> Condominio</param>
-        /// <return>CondominioModelo</return>
+
+        public async Task AtualizarCondominioAsync(AtualizarCondominioDTO condominio)
+        {
+            var condominioModelo = await PegarCondominioPeloIdAsync(condominio.Id);
+            condominioModelo.Nome = condominio.Nome;
+            condominioModelo.Bairro = condominio.Bairro;
+            _context.Condominio.Update(condominioModelo);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeletarCondominioAsync(int id)
         {
-            _contexto.Condominio.Remove(await PegarCondominioPeloIdAsync(id));
-            await _contexto.SaveChangesAsync();
+            _context.Condominio.Remove(await PegarCondominioPeloIdAsync(id));
+            await _context.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para criar um novo Condominio</para>
-        /// </summary>
-        /// <param name="Condominio">NovoCondominioDTO</param>
-        public async Task NovoCondominioAsync(NovoCondominioDTO Condominio)
+        public async Task<CondominioModelo> PegarCondominioPeloIdAsync(int id)
         {
-            await _contexto.Condominio.AddAsync(new CondominioModelo
-            {
-                Nome = Condominio.Nome,
-                Bairro = Condominio.Bairro,
-            });
-
-            await _contexto.SaveChangesAsync();
+            return await _context.Condominio
+                .FirstOrDefaultAsync(c => c.Id == id);  
         }
 
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar um Condominio pelo bairro</para>
-        /// </summary>
-        /// <param name="bairro"> Condominio</param>
-        /// <return>CondominioModelo</return>
-        public async Task<List<CondominioModelo>> PegarPeloBairroAsync(string bairro)
+        public async Task<List<CondominioModelo>> PegarCondominioPeloNomeAsync(string nome)
         {
-            return await _contexto.Condominio.PegarPeloBairroAsync(u => u.Bairro == bairro);
+            return await _context.Condominio
+                .Where(c => c.Nome.Contains(nome))
+                .ToListAsync();
         }
 
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar um Condominio pelo Id</para>
-        /// </summary>
-        /// <param name="id">Id do condominio</param>
-        /// <return>CondominioModelo</return>
-        public async Task<List<CondominioModelo>> PegarPeloIdAsync(int id)
+
+        public async Task<CondominioModelo> PegarCondominioPeloBairroAsync(string bairro)
         {
-            return await _contexto.Condominio.FirstOrDefaultAsync(u => u.Id == id);
+            return await _context.Condominio
+                .FirstOrDefaultAsync(c => c.Bairro == bairro);
         }
 
-        /// <summary>
-        /// <para>Resumo: Método assíncrono para pegar Condominio pelo nome</para>
-        /// </summary>
-        /// <param name="nome">Nome do Condominio</param>
-        /// <return>Lista CondominioModelo</return>
-        public async Task<List<CondominioModelo>> PegarPeloNomeAsync(string Nome)
-        {
-            return await _contexto.Condominio
-                        .Where(u => u.Nome.Contains(nome))
-                        .ToListAsync();
-        }
+        #endregion Metódos
     }
 }
