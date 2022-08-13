@@ -34,7 +34,7 @@ namespace PraticaProgramacao.src.repositorios.implementacoes
         {
             var familiaModelo = await PegarFamiliaPeloId(familia.Id);
             familiaModelo.Apto = familia.Apto;
-            familia.Nome = familia.Nome;
+            familiaModelo.Nome = familia.Nome;
             _context.Familia.Update(familiaModelo);
             await _context.SaveChangesAsync();
         }

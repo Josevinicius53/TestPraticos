@@ -7,8 +7,8 @@ namespace PraticaProgramacao.src.repositorios
 {
     public interface IMorador
     {
-         Task NovoMoradorAsync(NovoMoradorDTO Morador);
-         Task AtualizarMoradorAsync(AtualizarMoradorDTO Morador);
+         Task NovoMoradorAsync(NovoMoradorDTO morador);
+         Task AtualizarMoradorAsync(AtualizarMoradorDTO morador);
          Task DeletarMoradorAsync(int id);
          Task<MoradorModelo> PegarPeloIdAsync(int id);
          Task<List<MoradorModelo>> PegarPeloNomeAsync(string nome);

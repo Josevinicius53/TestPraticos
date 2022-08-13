@@ -1,40 +1,64 @@
-﻿using PraticaProgramacao.src.dtos;
+﻿using Microsoft.EntityFrameworkCore;
+using PraticaProgramacao.src.data;
+using PraticaProgramacao.src.dtos;
 using PraticaProgramacao.src.modelos;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PraticaProgramacao.src.repositorios.implementacoes
 {
     public class MoradorRepositorio : IMorador
     {
-        public Task AtualizarMoradorAsync(AtualizarMoradorDTO Morador)
+        private readonly PraticaProgramacaoContexto _context;
+
+        public MoradorRepositorio(PraticaProgramacaoContexto context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public async Task NovoMoradorAsync(NovoMoradorDTO morador)
+        {
+            await _context.AddAsync(new MoradorModelo
+            {
+                Nome = morador.Nome,
+                Idade = morador.Idade,
+            });
         }
 
-        public Task DeletarMoradorAsync(int id)
+        public async Task AtualizarMoradorAsync(AtualizarMoradorDTO morador)
         {
-            throw new System.NotImplementedException();
+            var moradorModelo = await PegarPeloIdAsync(morador.Id);
+            moradorModelo.Idade = morador.Idade;
+            moradorModelo.Nome = morador.Nome;
+            _context.Morador.Update(moradorModelo);
+            await _context.SaveChangesAsync();
         }
 
-        public Task NovoMoradorAsync(NovoMoradorDTO Morador)
+        public async Task DeletarMoradorAsync(int id)
         {
-            throw new System.NotImplementedException();
+            _context.Morador.Remove(await PegarPeloIdAsync(id));
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<MoradorModelo>> PegarPeloIdadeAsync(string idade)
+        public async Task<List<MoradorModelo>> PegarPeloIdadeAsync(string idade)
         {
-            throw new System.NotImplementedException();
+            return await _context.Morador
+                .Where(m => m.Idade.Contains(idade))
+                .ToListAsync();
         }
 
-        public Task<MoradorModelo> PegarPeloIdAsync(int id)
+        public async Task<MoradorModelo> PegarPeloIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _context.Morador
+                .Include(m => m.Familia)
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public Task<List<MoradorModelo>> PegarPeloNomeAsync(string nome)
+        public async Task<List<MoradorModelo>> PegarPeloNomeAsync(string nome)
         {
-            throw new System.NotImplementedException();
+            return await _context.Morador
+                .Where(m => m.Nome.Contains(nome))
+                .ToListAsync();
         }
     }
 }

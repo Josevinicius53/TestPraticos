@@ -1,6 +1,4 @@
-﻿using PraticaProgramacao.src.modelos;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PraticaProgramacao.src.dtos
 {
